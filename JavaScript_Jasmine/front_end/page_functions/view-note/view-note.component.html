@@ -1,0 +1,51 @@
+<div class="view-note-wrap" #viewNotewrap>
+  <div class="view-note-title">
+      {{noteInfo.title}}
+  </div>
+  <div class="note-info">
+    <div class="edit">
+      <i class="ion-compose" (click)="editNote()" *ngIf="isShowEdit"></i>
+      <i class="ion-trash-a" (click)="delect()"></i>
+    </div>
+    <div class="note-time">
+      {{noteInfo.date | date:"yyyy-MM-dd HH:mm:ss"}}
+    </div>
+    <ul class="note-tag">
+      <li *ngFor="let item of noteInfo.tag">
+        {{item.name}}
+      </li>
+    </ul>
+    <a class="sourceLink" href="{{noteInfo.sourceLink}}" target="_blank">
+      {{noteInfo.sourceLink}}
+    </a>
+  </div>
+  <div class="preview" previewHeight></div> 
+</div>
+
+<div class="catalog-wrap">
+  <h3>Index of Notes:</h3>
+  <h4>Markdown Headings</h4>  
+  <ul>
+    <li *ngFor="let item of catalog" [className]="item.tagName" [class.active]="item.isActive">
+      <a (click)="catalogNavigation(item)">{{item.text}}</a>
+    </li>
+  </ul>
+</div>
+
+<div class="delect-wrap" *ngIf="isShowDelect">
+  <div class="delect-content">
+    <div class="icon">
+      <i class="ion-trash-a"></i>  
+    </div>
+    <div class="text">
+      Delete Note
+    </div>
+    <div class="tip">
+      Are you sure to delete note<em>《{{noteInfo.title}}》</em>？
+    </div>
+    <div class="btn">
+      <button class="cancel" (click)="cancel()">Cancel</button>
+      <button class="delete" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>

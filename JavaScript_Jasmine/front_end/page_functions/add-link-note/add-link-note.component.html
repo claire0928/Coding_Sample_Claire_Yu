@@ -1,0 +1,32 @@
+<div class="add-link-note" *ngIf="!isShowMarkdownEditor" >
+  <div class="input-wrap">
+    <input id="urlnote-title" class="search-input" #myInput placeholder="Please input URL and Press Enter to generate note" autofocus="autofocus" (keydown.enter)="onEnter(myInput.value)"/>
+  </div>
+  <div class="note-name">
+    Notice：Generate URL note automatically would cost some time, please be patient！
+  </div>
+</div>
+
+<div class="add-note-wrap" *ngIf="isShowMarkdownEditor" >
+  <div class="add-note-title">
+    <input type="text" placeholder="Please input note title" [(ngModel)]="noteTitle">
+  </div>
+  <div class="add-note-toolbar">
+    <div class="add-note-toolbar-label">
+      <div class="add-note-toolbar-dropdown">
+        <app-dropdown [Label]="'Label'" [DropdownMenu]="dropdownMenu" (SelectItem)="selectItem($event)"></app-dropdown>
+      </div>
+      <ul class="tag-list-wrap">
+        <li class="tag-item" *ngFor="let item of labelList; let i=index">
+          <div>{{item.name}}</div>
+          <i class="ion-close-round" (click)="delectLabelItem(i)"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="add-note-toolbar-btn">
+      <app-button [Icon]="'ion-checkmark-circled'"  (click)="save()">Save</app-button>
+      <app-button [Icon]="'ion-reply'" (click)="cancel()">Cancel</app-button>
+    </div>
+  </div>
+  <div [innerHTML]="noteContent" class="preview" previewHeight></div> 
+</div>

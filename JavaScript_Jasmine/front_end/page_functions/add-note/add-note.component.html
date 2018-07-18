@@ -1,0 +1,24 @@
+<div class="add-note-wrap">
+  <div class="add-note-title">
+    <input type="text" id="note-title" placeholder="Input Title Here" [(ngModel)]="title">
+  </div>
+  <div class="add-note-toolbar">
+    <div class="add-note-toolbar-label">
+      <div class="add-note-toolbar-dropdown" id="tag-dropdown">
+        <app-dropdown [Label]="'Label'" [DropdownMenu]="dropdownMenu" (SelectItem)="selectItem($event)"></app-dropdown>
+      </div>
+      <ul class="tag-list-wrap">
+        <li class="tag-item" *ngFor="let item of tagList; let i=index">
+          <div>{{item.name}}</div>
+          <i class="ion-close-round" (click)="delectLabelItem(i)"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="add-note-toolbar-btn">
+      <app-button [Icon]="'ion-checkmark-circled'" (click)="save()" id="save-button">Save</app-button>
+    </div>
+  </div>
+  <div myMarkdownEditor (MarkdownEditorValue)="markdownValueChange($event)">
+    <textarea style="display:none"></textarea>
+  </div> 
+</div>
